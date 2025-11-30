@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <title>Simple Three Page Site</title><!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script><!-- Canva SDKs -->
+  <script src="/_sdk/element_sdk.js"></script><!-- Data SDK not used for storage, but schema is empty and persistence_enabled=false -->
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+  </style>
+  <script>
+    // Tailwind base setup
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['system-ui', 'ui-sans-serif', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full w-full m-0 p-0">
+  <div id="app-root" class="w-full h-full bg-[#f7f7f9] flex flex-col">
+   <header class="w-full">
+    <nav class="w-full bg-[#BA0C2F] text-white">
+     <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="flex items-center gap-2"><!-- Simple logo circle -->
+       <div class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center">
+        <div class="w-4 h-4 rounded-full bg-white/80"></div>
+       </div>
+       <div>
+        <h1 id="site-title" class="text-lg font-semibold tracking-wide">Cardinal Books</h1>
+        <p class="text-xs text-white/80">Ball State University</p>
+       </div>
+      </div>
+      <div class="flex gap-2 sm:gap-4" role="tablist" aria-label="Main navigation"><button id="nav-home" data-page="home" class="px-3 py-1.5 rounded-full text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70 focus-visible:ring-offset-[#BA0C2F]" type="button"> Home </button> <button id="nav-course" data-page="course" class="px-3 py-1.5 rounded-full text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70 focus-visible:ring-offset-[#BA0C2F]" type="button"> Course Materials </button> <button id="nav-about" data-page="about" class="px-3 py-1.5 rounded-full text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70 focus-visible:ring-offset-[#BA0C2F]" type="button"> About </button>
+      </div>
+     </div>
+    </nav>
+   </header>
+   <main id="main-content" class="flex-1 w-full">
+    <div class="max-w-5xl mx-auto px-4 py-6 sm:py-8"><!-- Home Page -->
+     <section id="page-home" aria-labelledby="home-heading">
+      <h2 id="home-heading" class="text-2xl sm:text-3xl font-semibold text-[#BA0C2F] mb-4">Welcome to Cardinal Books</h2>
+      <div class="bg-white rounded-lg shadow-sm p-6 border border-[#BA0C2F]/10 mb-6">
+       <p id="home-body" class="text-sm sm:text-base text-gray-800 leading-relaxed mb-4">Your official Ball State University bookstore for textbooks, course materials, and Cardinal gear. We're here to support your academic success every step of the way.</p>
+       <div class="grid sm:grid-cols-2 gap-4 mt-6">
+        <div class="bg-[#f7f7f9] rounded-lg p-4 border-l-4 border-[#BA0C2F]">
+         <h3 class="font-semibold text-[#BA0C2F] mb-2 text-base sm:text-lg">📚 Textbook Rentals</h3>
+         <p class="text-sm text-gray-700">Save up to 80% with our textbook rental program. Easy returns at the end of the semester.</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded-lg p-4 border-l-4 border-[#BA0C2F]">
+         <h3 class="font-semibold text-[#BA0C2F] mb-2 text-base sm:text-lg">💻 Digital Options</h3>
+         <p class="text-sm text-gray-700">Instant access to eTextbooks and digital course materials. Study anywhere, anytime.</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded-lg p-4 border-l-4 border-[#BA0C2F]">
+         <h3 class="font-semibold text-[#BA0C2F] mb-2 text-base sm:text-lg">🎓 Price Match</h3>
+         <p class="text-sm text-gray-700">We'll match any competitor's price on new textbooks. Guaranteed lowest prices.</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded-lg p-4 border-l-4 border-[#BA0C2F]">
+         <h3 class="font-semibold text-[#BA0C2F] mb-2 text-base sm:text-lg">🏪 Campus Location</h3>
+         <p class="text-sm text-gray-700">Visit us in the Student Center. Extended hours during rush week and finals.</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-[#BA0C2F] text-white rounded-lg shadow-sm p-6">
+       <h3 class="font-semibold text-lg sm:text-xl mb-3">📅 Important Dates</h3>
+       <ul class="space-y-2 text-sm sm:text-base text-white">
+        <li class="flex items-start gap-2"><span class="font-semibold min-w-[100px] text-white">Jan 8-12:</span> <span class="text-white/95">Spring semester textbook rush week</span></li>
+        <li class="flex items-start gap-2"><span class="font-semibold min-w-[100px] text-white">May 3-10:</span> <span class="text-white/95">End of semester textbook buyback</span></li>
+        <li class="flex items-start gap-2"><span class="font-semibold min-w-[100px] text-white">Aug 19-23:</span> <span class="text-white/95">Fall semester textbook rush week</span></li>
+       </ul>
+      </div>
+     </section><!-- Course Materials Page -->
+     <section id="page-course" aria-labelledby="course-heading" class="hidden">
+      <h2 id="course-heading" class="text-2xl sm:text-3xl font-semibold text-[#BA0C2F] mb-4">Course Materials</h2>
+      <div class="bg-white rounded-lg shadow-sm border border-[#BA0C2F]/10 p-6 mb-6">
+       <p id="course-body" class="text-sm sm:text-base text-gray-800 leading-relaxed mb-6">Find everything you need for your classes at Cardinal Books. We stock required textbooks, lab materials, art supplies, and more for every Ball State course.</p>
+       <h3 class="font-semibold text-[#BA0C2F] text-lg mb-3">How to Find Your Course Materials</h3>
+       <ol class="list-decimal pl-5 text-sm sm:text-base text-gray-800 space-y-2 mb-6">
+        <li>Visit our online course materials lookup tool</li>
+        <li>Enter your course department and number (e.g., ENGL 103)</li>
+        <li>View required and recommended materials for your section</li>
+        <li>Choose from new, used, rental, or digital options</li>
+        <li>Order online for pickup or have items shipped to you</li>
+       </ol>
+       <h3 class="font-semibold text-[#BA0C2F] text-lg mb-3">Popular Departments</h3>
+       <div class="grid sm:grid-cols-3 gap-3">
+        <div class="bg-[#f7f7f9] rounded p-3 border border-[#BA0C2F]/10">
+         <p class="font-semibold text-sm text-gray-800 mb-1">Business</p>
+         <p class="text-xs text-gray-600">Accounting, Finance, Marketing, Management</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded p-3 border border-[#BA0C2F]/10">
+         <p class="font-semibold text-sm text-gray-800 mb-1">Sciences</p>
+         <p class="text-xs text-gray-600">Biology, Chemistry, Physics, Lab Kits</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded p-3 border border-[#BA0C2F]/10">
+         <p class="font-semibold text-sm text-gray-800 mb-1">Arts &amp; Humanities</p>
+         <p class="text-xs text-gray-600">English, History, Art Supplies, Music</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded p-3 border border-[#BA0C2F]/10">
+         <p class="font-semibold text-sm text-gray-800 mb-1">Education</p>
+         <p class="text-xs text-gray-600">Teaching Materials, Classroom Resources</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded p-3 border border-[#BA0C2F]/10">
+         <p class="font-semibold text-sm text-gray-800 mb-1">Engineering</p>
+         <p class="text-xs text-gray-600">Technical Manuals, Software, Supplies</p>
+        </div>
+        <div class="bg-[#f7f7f9] rounded p-3 border border-[#BA0C2F]/10">
+         <p class="font-semibold text-sm text-gray-800 mb-1">Nursing</p>
+         <p class="text-xs text-gray-600">Medical Texts, Scrubs, Equipment</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-[#BA0C2F]/5 rounded-lg border-2 border-[#BA0C2F]/20 p-5">
+       <h3 class="font-semibold text-[#BA0C2F] text-base mb-2">💡 Money-Saving Tips</h3>
+       <ul class="text-sm text-gray-800 space-y-1.5">
+        <li>✓ Rent textbooks instead of buying to save up to 80%</li>
+        <li>✓ Check for used copies before purchasing new</li>
+        <li>✓ Consider digital versions for instant access and lower prices</li>
+        <li>✓ Sell back your books at the end of the semester</li>
+        <li>✓ Join our rewards program for exclusive discounts</li>
+       </ul>
+      </div>
+     </section><!-- About Page -->
+     <section id="page-about" aria-labelledby="about-heading" class="hidden">
+      <h2 id="about-heading" class="text-2xl sm:text-3xl font-semibold text-[#BA0C2F] mb-4">About Cardinal Books</h2>
+      <div class="bg-white rounded-lg shadow-sm p-6 border border-[#BA0C2F]/10 mb-6">
+       <p id="about-body" class="text-sm sm:text-base text-gray-800 leading-relaxed mb-4">Cardinal Books has been serving the Ball State University community for over 30 years. As your official campus bookstore, we're committed to providing affordable course materials, exceptional customer service, and a convenient shopping experience.</p>
+       <h3 class="font-semibold text-[#BA0C2F] text-lg mb-3 mt-6">Our Mission</h3>
+       <p class="text-sm sm:text-base text-gray-800 leading-relaxed mb-4">To support student success by providing access to required course materials at the lowest possible prices, while delivering outstanding service and fostering Cardinal pride.</p>
+       <h3 class="font-semibold text-[#BA0C2F] text-lg mb-3 mt-6">What We Offer</h3>
+       <div class="grid sm:grid-cols-2 gap-4 mb-6">
+        <div>
+         <h4 class="font-semibold text-gray-800 mb-2 text-sm sm:text-base">📖 Academic Materials</h4>
+         <ul class="text-sm text-gray-700 space-y-1 pl-4">
+          <li>• New and used textbooks</li>
+          <li>• Textbook rentals</li>
+          <li>• Digital eTextbooks</li>
+          <li>• Lab manuals and kits</li>
+          <li>• Art and engineering supplies</li>
+         </ul>
+        </div>
+        <div>
+         <h4 class="font-semibold text-gray-800 mb-2 text-sm sm:text-base">🎽 Cardinal Gear</h4>
+         <ul class="text-sm text-gray-700 space-y-1 pl-4">
+          <li>• Apparel and accessories</li>
+          <li>• Gifts and collectibles</li>
+          <li>• School supplies</li>
+          <li>• Technology and electronics</li>
+          <li>• Graduation regalia</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm p-6 border border-[#BA0C2F]/10 mb-6">
+       <h3 class="font-semibold text-[#BA0C2F] text-lg mb-3">Store Information</h3>
+       <div class="space-y-3 text-sm sm:text-base text-gray-800">
+        <div>
+         <p class="font-semibold text-gray-900">Hours</p>
+         <p>Monday - Friday: 8:00 AM - 6:00 PM<br>
+          Saturday: 10:00 AM - 4:00 PM<br>
+          Sunday: Closed<br><span class="text-xs text-gray-600">(Extended hours during rush week)</span></p>
+        </div>
+        <div>
+         <p class="font-semibold text-gray-900">Contact</p>
+         <p>Phone: (765) 285-5000<br>
+          Email: cardinalbooks@bsu.edu</p>
+        </div>
+       </div>
+      </div>
+      <div class="bg-[#BA0C2F] text-white rounded-lg shadow-sm p-6">
+       <h3 class="font-semibold text-lg mb-2">Chirp Chirp! 🐦</h3>
+       <p class="text-sm sm:text-base">We're proud to be part of the Ball State family. Whether you're a first-year student or a graduating senior, Cardinal Books is here to support your academic journey. Go Cardinals!</p>
+      </div>
+     </section>
+    </div>
+   </main>
+   <footer class="w-full bg-[#BA0C2F] text-white mt-auto">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs sm:text-sm">
+     <div class="flex flex-wrap items-center gap-4 sm:gap-6"><button id="footer-contact" type="button" class="underline underline-offset-4 decoration-white/60 hover:decoration-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-sm px-1 py-0.5"> Contact Us </button> <button id="footer-return" type="button" class="underline underline-offset-4 decoration-white/60 hover:decoration-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-sm px-1 py-0.5"> Return Policy </button> <button id="footer-terms" type="button" class="underline underline-offset-4 decoration-white/60 hover:decoration-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded-sm px-1 py-0.5"> Terms and Agreements </button>
+     </div>
+     <p class="text-white/80">© <span id="footer-year"></span> Cardinal Books</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // ---------- Simple Page Switching ----------
+    const pages = {
+      home: document.getElementById('page-home'),
+      course: document.getElementById('page-course'),
+      about: document.getElementById('page-about'),
+    };
+
+    const navButtons = {
+      home: document.getElementById('nav-home'),
+      course: document.getElementById('nav-course'),
+      about: document.getElementById('nav-about'),
+    };
+
+    function setActivePage(pageKey) {
+      Object.keys(pages).forEach(key => {
+        if (key === pageKey) {
+          pages[key].classList.remove('hidden');
+        } else {
+          pages[key].classList.add('hidden');
+        }
+      });
+
+      Object.keys(navButtons).forEach(key => {
+        if (key === pageKey) {
+          navButtons[key].classList.add('bg-white', 'text-[#BA0C2F]');
+          navButtons[key].setAttribute('aria-current', 'page');
+        } else {
+          navButtons[key].classList.remove('bg-white', 'text-[#BA0C2F]');
+          navButtons[key].removeAttribute('aria-current');
+        }
+      });
+    }
+
+    Object.values(navButtons).forEach(btn => {
+      btn.addEventListener('click', function () {
+        const pageKey = this.getAttribute('data-page');
+        setActivePage(pageKey);
+      });
+    });
+
+    // Initialize default page
+    setActivePage('home');
+
+    // Footer year
+    const yearSpan = document.getElementById('footer-year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // ---------- Canva Element SDK Config ----------
+    const defaultConfig = {
+      site_title: "Cardinal Books",
+      home_heading: "Home",
+      home_body: "Welcome to the home page of this simple three-page website. Use the navigation above to visit the Course Materials and About sections.",
+      course_heading: "Course Materials",
+      course_body: "This is the Course Materials page. You can list readings, assignments, and resources here.",
+      about_heading: "About",
+      about_body: "This simple website demonstrates a clean layout with three pages: Home, Course Materials, and About, along with a clear footer for important links.",
+      footer_contact: "Contact Us",
+      footer_return: "Return Policy",
+      footer_terms: "Terms and Agreements",
+      // Colors & typography
+      background_color: "#f7f7f9",
+      accent_color: "#BA0C2F",
+      surface_color: "#ffffff",
+      text_color: "#1f2933",
+      secondary_text_color: "#4b5563",
+      font_family: "system-ui",
+      font_size: 16
+    };
+
+    async function setupElementSdk() {
+      if (!window.elementSdk) {
+        return;
+      }
+
+      const element = {
+        defaultConfig,
+        onConfigChange: async (config) => {
+          const effective = Object.assign({}, defaultConfig, config);
+
+          // Typography base
+          const baseSize = Number(effective.font_size) || defaultConfig.font_size;
+          const customFont = effective.font_family || defaultConfig.font_family;
+          const fontStack = `${customFont}, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+
+          // Root colors
+          const root = document.getElementById('app-root');
+          if (root) {
+            root.style.backgroundColor = effective.background_color;
+          }
+
+          // Header and nav
+          const headerNav = document.querySelector('header nav');
+          if (headerNav) {
+            headerNav.style.backgroundColor = effective.accent_color;
+            headerNav.style.color = "#ffffff";
+          }
+
+          // Title
+          const siteTitleEl = document.getElementById('site-title');
+          if (siteTitleEl) {
+            siteTitleEl.textContent = effective.site_title;
+            siteTitleEl.style.fontFamily = fontStack;
+            siteTitleEl.style.fontSize = (baseSize * 1.1) + "px";
+          }
+
+          // Headings
+          const homeHeadingEl = document.getElementById('home-heading');
+          const courseHeadingEl = document.getElementById('course-heading');
+          const aboutHeadingEl = document.getElementById('about-heading');
+
+          [homeHeadingEl, courseHeadingEl, aboutHeadingEl].forEach(el => {
+            if (el) {
+              el.style.color = effective.accent_color;
+              el.style.fontFamily = fontStack;
+              el.style.fontSize = (baseSize * 1.6) + "px";
+            }
+          });
+
+          if (homeHeadingEl) homeHeadingEl.textContent = effective.home_heading;
+          if (courseHeadingEl) courseHeadingEl.textContent = effective.course_heading;
+          if (aboutHeadingEl) aboutHeadingEl.textContent = effective.about_heading;
+
+          // Body text
+          const homeBodyEl = document.getElementById('home-body');
+          const courseBodyEl = document.getElementById('course-body');
+          const aboutBodyEl = document.getElementById('about-body');
+
+          if (homeBodyEl) {
+            homeBodyEl.textContent = effective.home_body;
+            homeBodyEl.style.fontFamily = fontStack;
+            homeBodyEl.style.fontSize = baseSize + "px";
+            homeBodyEl.style.color = effective.text_color;
+            homeBodyEl.style.backgroundColor = effective.surface_color;
+          }
+          if (courseBodyEl) {
+            courseBodyEl.textContent = effective.course_body;
+            courseBodyEl.style.fontFamily = fontStack;
+            courseBodyEl.style.fontSize = baseSize + "px";
+            courseBodyEl.style.color = effective.text_color;
+          }
+          if (aboutBodyEl) {
+            aboutBodyEl.textContent = effective.about_body;
+            aboutBodyEl.style.fontFamily = fontStack;
+            aboutBodyEl.style.fontSize = baseSize + "px";
+            aboutBodyEl.style.color = effective.text_color;
+            aboutBodyEl.style.backgroundColor = effective.surface_color;
+          }
+
+          // Lists and misc text
+          const listItems = document.querySelectorAll('main ul li');
+          listItems.forEach(li => {
+            li.style.fontFamily = fontStack;
+            li.style.fontSize = baseSize + "px";
+            li.style.color = effective.secondary_text_color;
+          });
+
+          // Nav buttons
+          Object.values(navButtons).forEach(btn => {
+            if (btn) {
+              btn.style.fontFamily = fontStack;
+              btn.style.fontSize = (baseSize * 0.9) + "px";
+            }
+          });
+
+          // Footer colors & text
+          const footer = document.querySelector('footer');
+          if (footer) {
+            footer.style.backgroundColor = effective.accent_color;
+            footer.style.color = "#ffffff";
+            footer.style.fontFamily = fontStack;
+            footer.style.fontSize = (baseSize * 0.85) + "px";
+          }
+
+          const footerContact = document.getElementById('footer-contact');
+          const footerReturn = document.getElementById('footer-return');
+          const footerTerms = document.getElementById('footer-terms');
+
+          if (footerContact) {
+            footerContact.textContent = effective.footer_contact;
+            footerContact.style.fontFamily = fontStack;
+          }
+          if (footerReturn) {
+            footerReturn.textContent = effective.footer_return;
+            footerReturn.style.fontFamily = fontStack;
+          }
+          if (footerTerms) {
+            footerTerms.textContent = effective.footer_terms;
+            footerTerms.style.fontFamily = fontStack;
+          }
+
+          const footerYear = document.getElementById('footer-year');
+          if (footerYear) {
+            footerYear.parentElement.style.fontFamily = fontStack;
+          }
+        },
+        mapToCapabilities: (config) => {
+          const current = Object.assign({}, defaultConfig, config);
+
+          const backgroundRecolorable = {
+            get: () => current.background_color,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          };
+
+          const surfaceRecolorable = {
+            get: () => current.surface_color,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          };
+
+          const textRecolorable = {
+            get: () => current.text_color,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          };
+
+          const accentRecolorable = {
+            get: () => current.accent_color,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          };
+
+          const secondaryTextRecolorable = {
+            get: () => current.secondary_text_color,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ secondary_text_color: value });
+            }
+          };
+
+          const fontEditable = {
+            get: () => current.font_family,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          };
+
+          const fontSizeable = {
+            get: () => current.font_size,
+            set: (value) => {
+              if (!window.elementSdk) return;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          };
+
+          return {
+            recolorables: [
+              backgroundRecolorable,
+              surfaceRecolorable,
+              textRecolorable,
+              accentRecolorable,
+              secondaryTextRecolorable
+            ],
+            borderables: [],
+            fontEditable,
+            fontSizeable
+          };
+        },
+        mapToEditPanelValues: (config) => {
+          const current = Object.assign({}, defaultConfig, config);
+          return new Map([
+            ["site_title", current.site_title],
+            ["home_heading", current.home_heading],
+            ["home_body", current.home_body],
+            ["course_heading", current.course_heading],
+            ["course_body", current.course_body],
+            ["about_heading", current.about_heading],
+            ["about_body", current.about_body],
+            ["footer_contact", current.footer_contact],
+            ["footer_return", current.footer_return],
+            ["footer_terms", current.footer_terms]
+          ]);
+        }
+      };
+
+      window.elementSdk.init(element);
+    }
+
+    // Initialize SDK as soon as possible
+    setupElementSdk();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a66c1437097cef7',t:'MTc2NDQ2ODA2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
